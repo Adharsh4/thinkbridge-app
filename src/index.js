@@ -4,9 +4,23 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { HashRouter } from 'react-router-dom';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
+import reducer from './store/reducer';
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import "../node_modules/font-awesome/css/font-awesome.min.css"
+
+const store = createStore(reducer, applyMiddleware(thunk));
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <HashRouter>
+        <App />
+      </HashRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
